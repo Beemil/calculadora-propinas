@@ -5,4 +5,4 @@ export interface Propina {
     totalPagar : number;
 }
 
-export type CampoPropina = 'montoCuenta' | 'porcentajePropina' | 'montoPropina' | 'totalPagar';
+export type CampoPropina = 'montoCuenta' | 'porcentajePropina';
