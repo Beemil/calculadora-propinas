@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface botonPorcentajeProps{
+interface BotonPorcentajeProps{
     porcentaje: number;
     seleccionado: boolean;
     onClick: () => void;
 }
 
-const botonPorcentaje: React.FC<botonPorcentajeProps> = ({
+const BotonPorcentaje: React.FC<BotonPorcentajeProps> = ({
     porcentaje,
     seleccionado,
     onClick
@@ -25,4 +25,4 @@ const botonPorcentaje: React.FC<botonPorcentajeProps> = ({
     );
 };
 
-export default botonPorcentaje;
+export default BotonPorcentaje;

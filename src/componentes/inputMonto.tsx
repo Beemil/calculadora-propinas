@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface inputMontoProps{
+interface InputMontoProps{
     label: string;
     value : number | "",
     onChange: (value : string ) => void;
     placeholder?: string;
 }
 
-const inputMonto: React.FC<inputMontoProps> = ({
+const InputMonto: React.FC<InputMontoProps> = ({
     label,
     value, 
     onChange,
@@ -36,4 +36,4 @@ const inputMonto: React.FC<inputMontoProps> = ({
     );
 };
 
-export default inputMonto;
+export default InputMonto;
