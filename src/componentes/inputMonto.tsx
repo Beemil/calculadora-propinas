@@ -11,7 +11,7 @@ const InputMonto: React.FC<InputMontoProps> = ({
     label,
     value, 
     onChange,
-    placeholder = "0.00"
+    placeholder = "Ingresa el monto"
 }) =>{
     return (
         <div className="mb-2">
@@ -24,7 +24,7 @@ const InputMonto: React.FC<InputMontoProps> = ({
                 </span>
                 <input 
                 type="number"
-                value={value}
+                value={value || ""}
                 onChange={(e) => onChange (e.target.value)}
                 placeholder={placeholder}
                 step="0.01"
