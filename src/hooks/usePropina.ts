@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { toast} from 'react-hot-toast';
 import type { Propina } from '../types/Propina';
 
@@ -34,25 +34,19 @@ const usePropina = () => {
         
     }, [propina.montoCuenta, propina.porcentajePropina]);
 
-    //useEffect para calcular automaticamente
-    useEffect(() => {
-        const resultado = calcularPropina();
-        setPropina((prev) => ({
-            ...prev,
-            montoPropina: resultado.montoPropina,
-            totalPagar: resultado.totalPagar,
-        }));
-    }, [calcularPropina]);
-
     //handle para cambios
 
     const handleCambiarMonto = ( valor: string) => {
-        if (valor === '') {
-            setPropina((prev) => ({ ...prev, montoCuenta: 0 }));
+        if (valor === "") {
+            setPropina((prev) => ({
+                 ...prev, 
+                 montoCuenta: 0, 
+                 montoPropina: 0, 
+                 totalPagar: 0 }));
             return;
         }
 
-        const numValue = Number(valor);
+        const numValue = parseFloat(valor);
 
         if (isNaN(numValue) || numValue < 0) {
             toast.error('Por favor ingresa un monto válido.');
@@ -60,22 +54,34 @@ const usePropina = () => {
         }
 
         if (numValue > MONTO_MAXIMO) {
-            toast.error(`El monto no puede exceder ${MONTO_MAXIMO.toLocaleString()}.`);
+            toast.error(`El monto no puede exceder L.${MONTO_MAXIMO.toLocaleString()}.`);
             return;
         }
         setPropina((prev) => ({ ...prev, montoCuenta: numValue }));
     };
+
+
     const handleCambiarPorcentaje = ( porcentaje: number) => {
         setPropina((prev) => ({ ...prev, porcentajePropina: porcentaje }) );
         toast.success(`Propina del ${porcentaje}% seleccionada`);
     };
 
     const handleCalcular = () => {
-        if (propina.montoCuenta <= 0 || propina.montoCuenta <= 0) {
-            toast.error('Por favor ingresa un monto de cuenta válido para calcular la propina.');
+        const monto = Number(propina.montoCuenta);
+
+        if (!monto || monto <= 0) {
+            toast.error('Por favor ingresa el monto de la cuenta primero');
             return;
         }
-        toast.success('Cálculo de propina realizado con éxito.');
+
+        const resultado = calcularPropina();
+        setPropina((prev) => ({
+            ...prev,
+            montoPropina: resultado.montoPropina,
+            totalPagar: resultado.totalPagar,
+        }));
+
+        toast.success('¡Cálculo realizado con éxito!');
     };
 
     const handleLimpiar = () => {
